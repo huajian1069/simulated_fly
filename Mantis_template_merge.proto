@@ -1,0 +1,1831 @@
+PROTO Mantis [
+	field SFVec3f		translation 	0 0 0
+	field SFRotation 	rotation 	0 1 0 0
+	field SFString 		name 		"Mantis"
+	field SFString		controller 	"mantis"
+	field SFString 		controllerArgs 	""
+	field SFString		customData	""
+	field SFBool		supervisor	FALSE
+	field SFBool		synchronization TRUE
+	field MFNode		extensionSlot	[]		
+]
+{
+	Robot {
+	translation IS translation
+	rotation IS rotation
+	controller IS controller
+	controllerArgs IS controllerArgs
+	customData IS customData
+	supervisor IS supervisor
+	synchronization IS synchronization
+	name IS name
+	children [
+		# any new children of the body
+		Group{
+			children IS extensionSlot		
+		}
+	
+
+
+    #  -2  head
+       	DEF HEAD
+		HingeJoint {    # X-axis
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 1
+				position 0
+				axis 1 0 0
+				anchor  0 -0.175372 -2.67387        #set the point in blender
+			}
+			device [
+				RotationalMotor{
+					name "Head-x"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							#### modify the position parameters of leg joint 1
+				translation  0 -0.175372 -2.67387                   # global or local coordinate           ## keep in coordince with above parameters of hingejoint
+				children[
+
+
+
+
+				HingeJoint{         # y-axis
+				    jointParameters HingeJointParameters{
+                        axis 0 1 0
+				    }
+				    device[
+				        RotationalMotor{
+				            name "Head-y"
+				            maxTorque 1850
+				        }
+				    ]
+                   	endPoint Solid{
+				    	children[
+
+
+
+
+				    HingeJoint{                 # z-axis
+				        jointParameters HingeJointParameters{
+				            axis 0 0 1
+				        }
+				        device[
+				            RotationalMotor{
+				                name "Head-z"
+				                maxTorque 1850
+				            }
+				        ]
+				        endPoint Solid{
+				            children[
+				            
+				            
+				            
+				   
+				   
+				   
+				   
+				   
+				            
+				            
+				            
+				            
+				            
+				            ]
+				       	 	boundingObject Transform{
+                            		translation 0 0 -0.5
+                           			rotation 0 1 0 0
+                            		children[
+                                		Shape{
+                                    		geometry Box{
+                                    			size 1 1 1
+                                    		}
+                                		}
+                            		]
+                        	}
+                        	physics Physics{
+                            	density -1
+                            	mass 2
+                        	}
+
+				        }
+                    }
+                 
+				 
+				 
+						]
+						boundingObject Transform{
+							rotation 1 0 0 1.57
+							children[
+								Shape{
+			    					geometry Cylinder{
+			        				radius 0.05
+			        				height 0.1
+			    					}
+								}
+							]
+						}
+						physics Physics{
+                			density -1
+                			mass 0.5
+            			}
+					}
+				}
+				
+				
+				
+				]
+        		name "Head-x"
+				boundingObject Shape{
+			    	geometry Cylinder{
+			        	radius 0.05
+			        	height 0.1
+			    	}
+				}
+            	physics Physics{
+                	density -1
+                	mass 0.5
+            	}
+			}
+		}
+
+				            
+				            
+				            
+
+
+
+
+
+		# -1 Thorax shape
+		DEF THORAX Solid{
+			translation 0 0 0
+			children[
+
+					
+					
+			]	
+			name "THORAX"
+			boundingObject
+			Box {
+			    size 1.5 1 5
+			}
+			physics Physics{
+			    density -1
+			    mass 100
+			}
+		}
+
+
+
+
+
+
+         # 0  Abdomen
+			DEF ABDOMEN	
+       			HingeJoint {    # X-axis
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 1
+				position 0
+				axis 1 0 0
+				anchor  0 2.2 0.1        #set the point in blender
+			}
+			device [
+				RotationalMotor{
+					name "Abdomen-x"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							#### modify the position parameters of leg joint 1
+				translation  0 2.2 0.1  # global or local coordinate           ## keep in coordince with above parameters of hingejoint
+				children[
+
+
+
+				    HingeJoint{         # y-axis
+				    jointParameters HingeJointParameters{
+                        		axis 0 1 0
+				    }
+				    device[
+				        RotationalMotor{
+				            name "Abdomen-y"
+				            maxTorque 1850
+				        }
+				    ]
+                    			endPoint Solid{
+				    children[
+
+
+
+				        HingeJoint{                 # z-axis
+				            jointParameters HingeJointParameters{
+				            axis 0 0 1
+				        }
+				        device[
+				            RotationalMotor{
+				                name "Abdomen-z"
+				                maxTorque 1850
+				            }
+				        ]
+				        endPoint Solid{
+				            children[
+
+
+
+
+
+
+
+
+
+
+
+				        ]
+				        boundingObject Transform{
+                            translation 0 0 0.5
+                            rotation 0 1 0 0
+                            children[
+                            	Shape{
+                                    geometry Box{
+                                    	size 1 1 1
+                                    }
+                                }
+                            ]
+                        }
+                        physics Physics{
+                            density -1
+                            mass 2
+                        }
+
+				    }
+                }
+                
+                
+                
+                
+                
+            ]
+			boundingObject Transform{
+				rotation 1 0 0 1.57
+				children[
+					Shape{
+			    		geometry Cylinder{
+			        		radius 0.05
+			        		height 0.1
+			    		}
+					}
+				]
+			}
+			physics Physics{
+                density -1
+                mass 0.5
+            }
+		}
+	}
+	
+	
+	
+			]
+        	name "Abdomen-x"
+			boundingObject Shape{
+			    geometry Cylinder{
+			        radius 0.05
+			        height 0.1
+			    }
+			}
+            physics Physics{
+                density -1
+                mass 0.5
+            }
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+		# 1 Right_Rear leg
+		
+
+       DEF RPC_HINGE_JOINT 
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 1
+				position -0.7
+				axis 0 1 0
+				anchor 0.47586 -0.5 1.2777
+			}
+			device [
+				RotationalMotor{
+					name "RPC-y"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							
+				translation 0.47586 -0.5 1.2777               ## keep in coordince with above parameters of hingejoint
+				rotation 0 1 0 -0.7
+				children[
+
+
+
+
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 2
+				axis 0 0 1
+			}
+			device [
+				RotationalMotor{
+					name "RPC-z"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							
+				children[
+
+
+
+
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 3
+				axis 1 0 0
+			}
+			device [
+				RotationalMotor{
+					name "RPC-x"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{						
+				children[
+
+
+
+					HingeJoint {
+						jointParameters HingeJointParameters {	#### modify the position parameters of leg joint 2
+							position 0.9
+							axis 0 0 1
+							anchor 0.5 0 0
+						}
+						device [
+							RotationalMotor{
+								name "RPF"
+								maxTorque 3750
+							}
+						]
+						endPoint Solid{				#### modify the position parameters of leg joint 2
+							translation 0.5 0 0
+							rotation 0 0 1 0.9
+							children[
+	
+
+
+								HingeJoint{
+									#### modify the position parameters of leg joint 3
+									jointParameters HingeJointParameters{
+									  	position -1.2
+										axis 0 0 1 
+										anchor 1.55 0 0
+									}
+									device[
+										RotationalMotor{
+											name "RPT"
+											maxTorque 2050	
+										}
+									]
+									endPoint Solid{	#### modify the position parameters of leg joint 3
+										translation 1.55 0 0
+										rotation 0 0 1 -1.2
+										children[ 
+			
+
+
+
+											HingeJoint{
+											    jointParameters HingeJointParameters{  #### modify the position parameters of leg joint 4
+                                                    position 1
+	                                                axis 0 0 1
+	                                                anchor 1 0 0
+                                                }
+                                                device [
+	                                                RotationalMotor{
+		                                                name "RPE"
+		                                                maxTorque 2050
+	                                                }
+                                                ]
+                                                endPoint Solid{	      #### modify the position parameters of leg joint 4
+	                                                translation 1 0 0
+	                                                rotation 0 0 1 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    boundingObject Transform{      ## the bounding shape of leg part 4
+	                                                    translation 0.8 0 0
+	                                                    rotation 0 0 1 0
+	                                                    children [
+		                                                    Shape{
+			                                                    geometry Box{
+				                                                    size 1.6 0.15 0.1
+			                                                    }
+		                                                    }
+	                                                    ]
+                                                    }
+                                                    physics Physics{
+	                                                    density -1
+	                                                    mass 2
+                                                    }
+                                                }# end of the tarsus
+                                            }
+
+
+
+                                        ]
+                                        boundingObject Transform{          ## the bounding shape of leg part 3
+                                            translation 0.5 0 0
+                                            rotation 0 0 1 0
+                                            children[
+                                                 Shape{
+                                                    geometry Box{
+                                                        size 1 0.15 0.1
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                        physics Physics{
+                                            density -1
+                                            mass 2
+                                        }
+									} #end of the tibia
+								}
+
+
+
+
+							]
+                            boundingObject Transform{                     ## the bounding shape of leg part 2
+                                translation  0.8 0 0
+                                rotation 0 0 1 0
+                                children[
+                                    Shape{
+                                        geometry Box{
+                                            size 1.6 0.15 0.1
+                                        }
+                                    }
+                                ]
+                            }
+                            physics Physics{
+                                density -1
+                                mass 2
+                            }
+						} #end of the femur
+					}
+
+
+
+
+
+
+
+				]
+                boundingObject Transform{
+                    translation 0.25 0 0
+                    children[
+                        Shape{
+                            geometry Box{
+                                size 0.5 0.1 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+
+				]
+                boundingObject Transform{
+                    rotation 1 0 0 1.57
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+
+
+				]
+                boundingObject Transform{
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                name "RPC_"
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+
+
+
+
+
+
+    # 2 Right_Middle leg
+	  DEF RMC_HINGE_JOINT 
+      HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 1
+				position 0
+				axis 0 1 0
+				anchor 0.75058 -0.90576 0.5868
+			}
+			device [
+				RotationalMotor{
+					name "RMC-y"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							#### modify the position parameters of leg joint 1
+				translation 0.75058 -0.90576 0.5868             ## keep in coordince with above parameters of hingejoint
+				rotation 0 1 0 0
+				children[
+    
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 2
+				axis 0 0 1
+			}
+			device [
+				RotationalMotor{
+					name "RMC-z"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							
+				children[
+
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 3
+				axis 1 0 0
+			}
+			device [
+				RotationalMotor{
+					name "RMC-x"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{						
+				children[
+
+
+
+
+
+					DEF RMF_HINGE_JOINT HingeJoint {
+						jointParameters HingeJointParameters {	#### modify the position parameters of leg joint 2
+							position 0.9
+							axis 0 0 1
+							anchor 0.5 0 0
+						}
+						device [
+							RotationalMotor{
+								name "RMF"
+								maxTorque 3750
+							}
+						]
+						endPoint Solid{				#### modify the position parameters of leg joint 2
+							translation 0.5 0 0
+							rotation 0 0 1 0.9
+							children[
+			
+
+
+
+
+								HingeJoint{
+									#### modify the position parameters of leg joint 3
+									jointParameters HingeJointParameters{
+									  	position -1.2
+										axis 0 0 1
+										anchor 1.55 0 0
+									}
+									device[
+										RotationalMotor{
+											name "RMT"
+											maxTorque 2050
+										}
+									]
+									endPoint Solid{	#### modify the position parameters of leg joint 3
+										translation 1.55 0 0
+										rotation 0 0 1 -1.2
+										children[
+			
+
+
+											    HingeJoint{
+											    jointParameters HingeJointParameters{  #### modify the position parameters of leg joint 4
+                                                    position 1
+	                                                axis 0 0 1
+	                                                anchor 1 0 0
+                                                }
+                                                device [
+	                                                RotationalMotor{
+		                                                name "RME"
+		                                                maxTorque 2050
+	                                                }
+                                                ]
+                                                endPoint Solid{	      #### modify the position parameters of leg joint 4
+	                                                translation 1 0 0
+	                                                rotation 0 0 1 1
+	      
+
+
+
+
+
+
+
+
+
+                                                    boundingObject Transform{      ## the bounding shape of leg part 4
+	                                                    translation 0.8 0 0
+	                                                    rotation 0 0 1 0
+	                                                    children [
+		                                                    Shape{
+			                                                    geometry Box{
+				                                                    size 1.6 0.15 0.1
+			                                                    }
+		                                                    }
+	                                                    ]
+                                                    }
+                                                    physics Physics{
+	                                                    density -1
+	                                                    mass 2
+                                                    }
+                                                }# end of the tarsus
+                                            }
+
+
+
+
+                                        ]
+                                        boundingObject Transform{          ## the bounding shape of leg part 3
+                                            translation 0.5 0 0
+                                            rotation 0 0 1 0
+                                            children[
+                                                  Shape{
+                                                    geometry Box{
+                                                        size 1 0.15 0.1
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                        physics Physics{
+                                            density -1
+                                            mass 2
+                                        }
+									} #end of the tibia
+								}
+
+
+
+
+
+
+							]
+                            boundingObject Transform{                     ## the bounding shape of leg part 2
+                                translation  0.8 0 0
+                                rotation 0 0 1 0
+                                children[
+                                    Shape{
+                                        geometry Box{
+                                            size 1.6 0.15 0.1
+                                        }
+                                    }
+                                ]
+                            }
+                            physics Physics{
+                                density -1
+                                mass 2
+                            }
+						} #end of the femur
+					}
+
+
+
+
+				]
+                boundingObject Transform{
+                    translation 0.25 0 0
+                    children[
+                        Shape{
+                            geometry Box{
+                                size 0.5 0.1 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+
+				]
+                boundingObject Transform{
+                    rotation 1 0 0 1.57
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+
+
+				]
+                boundingObject Transform{
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                name "RMC_"
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 3 Right_Front leg
+		DEF RAC_HINGE_JOINT 
+         HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 1
+				position 0.7
+				axis 0 1 0
+				anchor 0.8859 -0.77502 -1.70955
+			}
+			device [
+				RotationalMotor{
+					name "RAC-y"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							#### modify the position parameters of leg joint 1
+				translation 0.8859 -0.77502 -1.70955              ## keep in coordince with above parameters of hingejoint
+				rotation 0 1 0 0.7
+				children[
+
+
+
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 2
+				axis 0 0 1
+			}
+			device [
+				RotationalMotor{
+					name "RAC-z"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							
+				children[
+
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 3
+				axis 1 0 0
+			}
+			device [
+				RotationalMotor{
+					name "RAC-x"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{						
+				children[
+
+
+					HingeJoint {
+						jointParameters HingeJointParameters {	#### modify the position parameters of leg joint 2
+							position 0.9
+							axis 0 0 1
+							anchor 0.5 0 0
+						}
+						device [
+							RotationalMotor{
+								name "RAF"
+								maxTorque 3750
+							}
+						]
+						endPoint Solid{				#### modify the position parameters of leg joint 2
+							translation 0.5 0 0
+							rotation 0 0 1 0.9
+							children[
+	
+	
+
+								HingeJoint{
+									#### modify the position parameters of leg joint 3
+									jointParameters HingeJointParameters{
+									  	position -1.2
+										axis 0 0 1
+										anchor 1.55 0 0
+									}
+									device[
+										RotationalMotor{
+											name "RAT"
+											maxTorque 2050
+										}
+									]
+									endPoint Solid{	#### modify the position parameters of leg joint 3
+										translation 1.55 0 0
+										rotation 0 0 1 -1.2
+										children[
+	
+
+											HingeJoint{
+											    jointParameters HingeJointParameters{  #### modify the position parameters of leg joint 4
+                                                    position 1
+	                                                axis 0 0 1
+	                                                anchor 1 0 0
+                                                }
+                                                device [
+	                                                RotationalMotor{
+		                                                name "RAE"
+		                                                maxTorque 2050
+	                                                }
+                                                ]
+                                                endPoint Solid{	      #### modify the position parameters of leg joint 4
+	                                                translation 1 0 0
+	                                                rotation 0 0 1 1
+
+
+
+
+
+
+
+
+
+
+                                                    boundingObject Transform{      ## the bounding shape of leg part 4
+	                                                    translation 0.8 0 0
+	                                                    rotation 0 0 1 0
+	                                                    children [
+		                                                     Shape{
+			                                                    geometry Box{
+				                                                    size 1.6 0.15 0.1
+			                                                    }
+		                                                    }
+	                                                    ]
+                                                    }
+                                                    physics Physics{
+	                                                    density -1
+	                                                    mass 2
+                                                    }
+                                                }# end of the tarsus
+                                            }
+
+
+                                        ]
+                                        boundingObject Transform{          ## the bounding shape of leg part 3
+                                            translation 0.5 0 0
+                                            rotation 0 0 1 0
+                                            children[
+                                                 Shape{
+                                                    geometry Box{
+                                                        size 1 0.15 0.1
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                        physics Physics{
+                                            density -1
+                                            mass 2
+                                        }
+									} #end of the tibia
+								}
+
+
+
+
+
+							]
+                            boundingObject Transform{                     ## the bounding shape of leg part 2
+                                translation  0.8 0 0
+                                rotation 0 0 1 0
+                                children[
+                                     Shape{
+                                        geometry Box{
+                                            size 1.6 0.15 0.1
+                                        }
+                                    }
+                                ]
+                            }
+                            physics Physics{
+                                density -1
+                                mass 2
+                            }
+						} #end of the femur
+					}
+
+
+
+
+
+				]
+                boundingObject Transform{
+                    translation 0.25 0 0
+                    children[
+                        Shape{
+                            geometry Box{
+                                size 0.5 0.1 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+				]
+                boundingObject Transform{
+                    rotation 1 0 0 1.57
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+				]
+                boundingObject Transform{
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                name "RAC_"
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+
+         # 4 Left_Front leg
+		DEF LAC_HINGE_JOINT 
+      HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 1
+				position -0.7
+				axis 0 1 0
+				anchor -0.88950 -0.77869 -1.71708
+			}
+			device [
+				RotationalMotor{
+					name "LAC-y"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							#### modify the position parameters of leg joint 1
+				translation -0.88950 -0.77869 -1.71708             ## keep in coordince with above parameters of hingejoint
+				rotation 0 1 0 2.44
+				children[
+     
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 2
+				axis 0 0 1
+			}
+			device [
+				RotationalMotor{
+					name "LAC-z"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							
+				children[
+
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 3
+				axis 1 0 0
+			}
+			device [
+				RotationalMotor{
+					name "LAC-x"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{						
+				children[
+
+
+					 HingeJoint {
+						jointParameters HingeJointParameters {	#### modify the position parameters of leg joint 2
+							position 0.9
+							axis 0 0 1
+							anchor 0.5 0 0
+						}
+						device [
+							RotationalMotor{
+								name "LAF"
+								maxTorque 3750
+							}
+						]
+						endPoint Solid{				#### modify the position parameters of leg joint 2
+							translation 0.5 0 0
+							rotation 0 0 1 0.9
+							children[
+
+
+
+
+
+								HingeJoint{
+									#### modify the position parameters of leg joint 3
+									jointParameters HingeJointParameters{
+									  	position -1.2
+										axis 0 0 1
+										anchor 1.55 0 0
+									}
+									device[
+										RotationalMotor{
+											name "LAT"
+											maxTorque 2050
+										}
+									]
+									endPoint Solid{	#### modify the position parameters of leg joint 3
+										translation 1.55 0 0
+										rotation 0 0 1 -1.2
+										children[
+
+
+
+
+
+											HingeJoint{
+											    jointParameters HingeJointParameters{  #### modify the position parameters of leg joint 4
+                                                    position 1
+	                                                axis 0 0 1
+	                                                anchor 1 0 0
+                                                }
+                                                device [
+	                                                RotationalMotor{
+		                                                name "LAE"
+		                                                maxTorque 2050
+	                                                }
+                                                ]
+                                                endPoint Solid{	      #### modify the position parameters of leg joint 4
+	                                                translation 1 0 0
+	                                                rotation 0 0 1 1
+
+
+
+
+
+
+                                                    boundingObject Transform{      ## the bounding shape of leg part 4
+	                                                    translation 0.8 0 0
+	                                                    rotation 0 0 1 0
+	                                                    children [
+		                                                    Shape{
+			                                                    geometry DEF TARSUS Box{
+				                                                    size 1.6 0.15 0.1
+			                                                    }
+		                                                    }
+	                                                    ]
+                                                    }
+                                                    physics Physics{
+	                                                    density -1
+	                                                    mass 2
+                                                    }
+                                                }# end of the tarsus
+                                            }
+
+
+
+
+
+
+
+                                        ]
+                                        boundingObject Transform{          ## the bounding shape of leg part 3
+                                            translation 0.5 0 0
+                                            rotation 0 0 1 0
+                                            children[
+                                                Shape{
+                                                    geometry Box{
+                                                        size 1 0.15 0.1
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                        physics Physics{
+                                            density -1
+                                            mass 2
+                                        }
+									} #end of the tibia
+								}
+
+
+
+
+
+
+
+							]
+                            boundingObject Transform{                     ## the bounding shape of leg part 2
+                                translation  0.8 0 0
+                                rotation 0 0 1 0
+                                children[
+                                    Shape{
+                                        geometry Box{
+                                            size 1.6 0.15 0.1
+                                        }
+                                    }
+                                ]
+                            }
+                            physics Physics{
+                                density -1
+                                mass 2
+                            }
+						} #end of the femur
+					}
+
+
+
+				]
+                boundingObject Transform{
+                    translation 0.25 0 0
+                    children[
+                        Shape{
+                            geometry Box{
+                                size 0.5 0.1 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+				]
+                boundingObject Transform{
+                    rotation 1 0 0 1.57
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+				]
+                boundingObject Transform{
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                name "LAC_"
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+
+		 # 5 Left_Midlle leg
+		DEF LMC_HINGE_JOINT 
+         HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 1
+				position 0
+				axis 0 1 0
+				anchor -0.75701 -0.90887 0.58569
+			}
+			device [
+				RotationalMotor{
+					name "LMC-y"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							#### modify the position parameters of leg joint 1
+				translation -0.75701 -0.90887 0.58569             ## keep in coordince with above parameters of hingejoint
+				rotation 0 1 0 3.14
+				children[
+
+
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 2
+				axis 0 0 1
+			}
+			device [
+				RotationalMotor{
+					name "LMC-z"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							
+				children[
+
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 3
+				axis 1 0 0
+			}
+			device [
+				RotationalMotor{
+					name "LMC-x"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{						
+				children[
+
+
+
+
+					HingeJoint {
+						jointParameters HingeJointParameters {	#### modify the position parameters of leg joint 2
+							position 0.9
+							axis 0 0 1
+							anchor 0.5 0 0
+						}
+						device [
+							RotationalMotor{
+								name "LMF"
+								maxTorque 3750
+							}
+						]
+						endPoint Solid{				#### modify the position parameters of leg joint 2
+							translation 0.5 0 0
+							rotation 0 0 1 0.9
+							children[
+	
+
+
+
+
+								HingeJoint{
+									#### modify the position parameters of leg joint 3
+									jointParameters HingeJointParameters{
+									  	position -1.2
+										axis 0 0 1
+										anchor 1.55 0 0
+									}
+									device[
+										RotationalMotor{
+											name "LMT"
+											maxTorque 2050
+										}
+									]
+									endPoint Solid{	#### modify the position parameters of leg joint 3
+										translation 1.55 0 0
+										rotation 0 0 1 -1.2
+										children[
+
+
+
+
+
+											HingeJoint{
+											    jointParameters HingeJointParameters{  #### modify the position parameters of leg joint 4
+                                                    position 1
+	                                                axis 0 0 1
+	                                                anchor 1 0 0
+                                                }
+                                                device [
+	                                                RotationalMotor{
+		                                                name "LME"
+		                                                maxTorque 2050
+	                                                }
+                                                ]
+                                                endPoint Solid{	      #### modify the position parameters of leg joint 4
+	                                                translation 1 0 0
+	                                                rotation 0 0 1 1
+	                   
+
+
+
+
+
+                                                    boundingObject Transform{      ## the bounding shape of leg part 4
+	                                                    translation 0.8 0 0
+	                                                    rotation 0 0 1 0
+	                                                    children [
+		                                                    Shape{
+			                                                    geometry Box{
+				                                                    size 1.6 0.15 0.1
+			                                                    }
+		                                                    }
+	                                                    ]
+                                                    }
+                                                    physics Physics{
+	                                                    density -1
+	                                                    mass 2
+                                                    }
+                                                }# end of the tarsus
+                                            }
+
+
+
+
+
+                                        ]
+                                        boundingObject Transform{          ## the bounding shape of leg part 3
+                                            translation 0.5 0 0
+                                            rotation 0 0 1 0
+                                            children[
+                                                Shape{
+                                                    geometry Box{
+                                                        size 1 0.15 0.1
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                        physics Physics{
+                                            density -1
+                                            mass 2
+                                        }
+									} #end of the tibia
+								}
+
+
+
+
+
+
+							]
+                            boundingObject Transform{                     ## the bounding shape of leg part 2
+                                translation  0.8 0 0
+                                rotation 0 0 1 0
+                                children[
+                                   Shape{
+                                        geometry Box{
+                                            size 1.6 0.15 0.1
+                                        }
+                                    }
+                                ]
+                            }
+                            physics Physics{
+                                density -1
+                                mass 2
+                            }
+						} #end of the femur
+					}
+
+
+
+
+
+
+				]
+                boundingObject Transform{
+                    translation 0.25 0 0
+                    children[
+                        Shape{
+                            geometry Box{
+                                size 0.5 0.1 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+				]
+                boundingObject Transform{
+                    rotation 1 0 0 1.57
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+				]
+                boundingObject Transform{
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                name "LMC_"
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+
+
+		 # 6 LEFT_Rear leg
+		DEF LPC_HINGE_JOINT 
+         HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 1
+				position 0.7
+				axis 0 1 0
+				anchor -0.47809 -0.50494 1.28127
+			}
+			device [
+				RotationalMotor{
+					name "LPC-y"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							#### modify the position parameters of leg joint 1
+				translation -0.47809 -0.50494 1.28127             ## keep in coordince with above parameters of hingejoint
+				rotation 0 1 0 3.84
+				children[
+
+
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 2
+				axis 0 0 1
+			}
+			device [
+				RotationalMotor{
+					name "LPC-z"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{							
+				children[
+
+
+       HingeJoint {
+			jointParameters HingeJointParameters{				#### modify the position parameters of leg joint 3
+				axis 1 0 0
+			}
+			device [
+				RotationalMotor{
+					name "LPC-x"
+					maxTorque 1850
+				}
+			]
+			endPoint Solid{						
+				children[
+
+
+					 HingeJoint {
+						jointParameters HingeJointParameters {	#### modify the position parameters of leg joint 2
+							position 0.9
+							axis 0 0 1
+							anchor 0.5 0 0
+						}
+						device [
+							RotationalMotor{
+								name "LPF"
+								maxTorque 3750
+							}
+						]
+						endPoint Solid{				#### modify the position parameters of leg joint 2
+							translation 0.5 0 0
+							rotation 0 0 1 0.9
+							children[
+	
+
+
+
+
+								HingeJoint{
+									#### modify the position parameters of leg joint 3
+									jointParameters HingeJointParameters{
+									  	position -1.2
+										axis 0 0 1
+										anchor 1.55 0 0
+									}
+									device[
+										RotationalMotor{
+											name "LPT"
+											maxTorque 2050
+										}
+									]
+									endPoint Solid{	#### modify the position parameters of leg joint 3
+										translation 1.55 0 0
+										rotation 0 0 1 -1.2
+										children[
+
+
+
+
+
+
+											HingeJoint{
+											    jointParameters HingeJointParameters{  #### modify the position parameters of leg joint 4
+                                                    position 1
+	                                                axis 0 0 1
+	                                                anchor 1 0 0
+                                                }
+                                                device [
+	                                                RotationalMotor{
+		                                                name "LPE"
+		                                                maxTorque 2050
+	                                                }
+                                                ]
+                                                endPoint Solid{	      #### modify the position parameters of leg joint 4
+	                                                translation 1 0 0
+	                                                rotation 0 0 1 1
+	
+
+
+
+
+                                                    boundingObject Transform{      ## the bounding shape of leg part 4
+	                                                    translation 0.8 0 0
+	                                                    rotation 0 0 1 0
+	                                                    children [
+		                                                     Shape{
+			                                                    geometry Box{
+				                                                    size 1.6 0.15 0.1
+			                                                    }
+		                                                    }
+	                                                    ]
+                                                    }
+                                                    physics Physics{
+	                                                    density -1
+	                                                    mass 2
+                                                    }
+                                                }# end of the tarsus
+                                            }
+
+
+
+
+
+                                        ]
+                                        boundingObject Transform{          ## the bounding shape of leg part 3
+                                            translation 0.5 0 0
+                                            rotation 0 0 1 0
+                                            children[
+                                                Shape{
+                                                    geometry Box{
+                                                        size 1 0.15 0.1
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                        physics Physics{
+                                            density -1
+                                            mass 2
+                                        }
+									} #end of the tibia
+								}
+
+
+
+
+
+							]
+                            boundingObject Transform{                     ## the bounding shape of leg part 2
+                                translation  0.8 0 0
+                                rotation 0 0 1 0
+                                children[
+                                    Shape{
+                                        geometry Box{
+                                            size 1.6 0.15 0.1
+                                        }
+                                    }
+                                ]
+                            }
+                            physics Physics{
+                                density -1
+                                mass 2
+                            }
+						} #end of the femur
+					}
+
+
+
+				]
+                boundingObject Transform{
+                    translation 0.25 0 0
+                    children[
+                        Shape{
+                            geometry Box{
+                                size 0.5 0.1 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+				]
+                boundingObject Transform{
+                    rotation 1 0 0 1.57
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+				]
+                boundingObject Transform{
+                    children[
+                        Shape{
+                            geometry Cylinder{
+                                height 0.3
+                                radius 0.1
+                            }
+                        }
+                    ]
+                }
+                name "LPC_"
+                physics Physics{
+                    density -1
+                    mass 2
+                }
+			} # end of the coxa
+		}
+
+
+
+
+	]
+	physics DEF STANDARD Physics {
+	    density -1
+	    mass 0.1
+	    centerOfMass [
+	        0 0 0
+	    ]
+	    inertiaMatrix [
+	        1 1 1 0 0 0
+	    ]
+	}
+	}
+}
